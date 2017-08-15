@@ -39,36 +39,18 @@ class GuaAnimation {
 
     draw() {
         var context = this.game.context
-        // if (this.flipX) {
-            context.save()
-            // var x = this.x + this.w / 2
-            var w2 = this.w / 2
-            var h2 = this.h / 2
-            context.translate(this.x + w2, this.y + h2)
-            if (this.flipX) {
-                context.scale(-1, 1)
-            }
-            context.globalAlpha = this.alpha
-            // log('debug',this.rotation )
-            context.rotate(this.rotation * Math.PI / 180)
-            context.translate(-w2,-h2)
-            context.drawImage(this.texture, 0,0)
-            context.restore()
-        // } else {
-        //     context.drawImage(this.texture,this.x,this.y)
-        // }
-
-        // if (this.flipX) {
-        //     context.save()
-        //     var x = this.x + this.w / 2
-        //     context.translate(x, 0)
-        //     context.scale(-1, 1)
-        //     // context.drawImage(this.texture, this.x,this.y)
-        //     context.drawImage(this.texture, 0,this.y)
-        //     context.restore()
-        // } else {
-        //     context.drawImage(this.texture,this.x,this.y)
-        // }
+        context.save()
+        var w2 = this.w / 2
+        var h2 = this.h / 2
+        context.translate(this.x + w2, this.y + h2)
+        if (this.flipX) {
+            context.scale(-1, 1)
+        }
+        context.globalAlpha = this.alpha
+        context.rotate(this.rotation * Math.PI / 180)
+        context.translate(-w2,-h2)
+        context.drawImage(this.texture, 0,0)
+        context.restore()
 
     }
 
