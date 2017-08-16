@@ -36,6 +36,7 @@ class Pipes {
         for (var i = 0; i < this.pipes.length / 2; i+= 2) {
             var p1 = this.pipes[i]
             var p2 = this.pipes[i+1]
+            // log('space pipe',p1.y,p2.y)
             p1.x -= 5
             p2.x -= 5
             if (p1.x < -50) {

@@ -42,24 +42,9 @@ var __main = function() {
         b1: 'img/b1.png',
         b2: 'img/b2.png',
         b3: 'img/b3.png',
-        // sky: 'img/sky.jpg',
-        // enemy5: 'img/enemy5.png',
-        // enemy1: 'img/enemy1.png',
-        // enemy2: 'img/enemy2.png',
-        // enemy3: 'img/enemy3.png',
-        // enemy4: 'img/enemy4.png',
-        // fire: 'img/fire.png',
-        // 走路动画
-        // w1:'img/w1.png',
-        // w2:'img/w1.png',
-        // w3:'img/w1.png',
-        // w4:'img/w1.png',
-        // w5:'img/w1.png',
-        // w6:'img/w6.png',
-        // w7:'img/w7.png',
-        // w8:'img/w8.png',
-        // w9:'img/w9.png',
-        // 多状态动画
+        gm: 'img/gm.png',
+        begin: 'img/begin.png',
+
 
     }
     var game = GuaGame.instance(30, images, function(g){

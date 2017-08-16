@@ -1,18 +1,11 @@
 class SceneTitle extends GuaScene {
     constructor(game) {
         super(game)
-        // var l = GuaLabel.new(this.game,'hello')
-        // this.addElement(l)
-        // game.registerAction('k', function(){
-        //     var s = Scene(game)
-        //     game.replaceScene(s)
-        // })
-        // game.registerAction('e', function(){
-        //     var e = SceneEditor.new(game)
-        //     game.replaceScene(e)
-        // })
-        // var ps = GuaParticleSystem.new(this.game)
-        // this.addElement(ps)
+        this.setup()
+        this.setupInputs()
+    }
+
+    setup() {
         // bg
         var bg = GuaImage.new(this.game,'bg')
         this.addElement(bg)
@@ -32,11 +25,15 @@ class SceneTitle extends GuaScene {
         // bird
         var b = GuaAnimation.new(this.game)
         this.birdSpeed = 2
-        b.x = 180
+        b.x = 80
         b.y = 100
         this.b = b
         this.addElement(b)
-        this.setupInputs()
+        // 生命系统
+        this.end = false
+        this.score = 0
+        // var sname = "" + this.score
+        // var score = GuaImage.new(this.game,)
     }
 
     debug() {
@@ -59,17 +56,22 @@ class SceneTitle extends GuaScene {
     }
 
     update() {
-        super.update()
-        this.skipCount--
-        var offset = 5
-        if (this.skipCount === 0) {
-            this.skipCount = 4
-            offset = -15
+        // 横线和竖线同时与另一个矩形的竖线和横线相交，则两矩形相交
+        // 鸟和管子不碰撞简化为：p.x - b.w < b.x < p.x + p.w && 间隔上y p1.y+p1.h< b.y < p2.y - b.h
+        if (!this.end) {
+            super.update()
+            this.skipCount--
+            var offset = 5
+            if (this.skipCount === 0) {
+                this.skipCount = 4
+                offset = -15
+            }
+            for (var i = 0; i < 30; i++) {
+                var g = this.grounds[i]
+                g.x -= offset
+            }
         }
-        for (var i = 0; i < 30; i++) {
-            var g = this.grounds[i]
-            g.x -= offset
-        }
+
     }
 
 
