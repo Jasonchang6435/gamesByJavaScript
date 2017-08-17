@@ -80,5 +80,16 @@ class SceneTitle extends GuaScene {
         // draw labels
         // this.game.context.fillText('按 k 开始游戏', 100, 190)
         // this.game.context.fillText('按 e 编辑关卡', 100, 150)
+        var score = '' + this.score
+        var x = 0
+        var y = 0
+        for (let i = 0; i < score.length; i++) {
+            let s = score[i]
+            let num = GuaImage.new(this.game,'s' + s)
+            num.x = x
+            num.y = y
+            this.game.drawImage(num,x,y)
+            x += 20
+        }
     }
 }

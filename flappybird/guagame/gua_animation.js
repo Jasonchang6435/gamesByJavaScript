@@ -101,6 +101,7 @@ class GuaAnimation {
                     } else if (p.x + p.w < b.x && p.birdIn) {
                         log('得分加一，更新得分')
                         p.birdIn = false
+                        this.scene.score++
                     }
 
                 }

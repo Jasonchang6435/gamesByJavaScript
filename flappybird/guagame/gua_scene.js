@@ -41,10 +41,12 @@ class GuaScene {
                     // 子弹要循环判断碰撞，就要在离开页面时删除不需要判断的子弹
             }else if ( (e instanceof Bullet) && e.y < 0){
                 this.elements.splice(i,1)
-            } else if (e instanceof Enemy){
+            }
+            // else if (e instanceof Enemy){
+            //     e.update(i)
+            // }
+            else {
                 e.update(i)
-            } else {
-                e.update()
             }
 
         }

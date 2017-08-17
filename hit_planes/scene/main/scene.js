@@ -33,6 +33,22 @@ class Bullet extends GuaImage {
     }
 }
 
+class Laser extends GuaImage {
+    constructor(game) {
+        super(game,'laser')
+        this.setup()
+    }
+
+    setup() {
+        this.speed = config.bullet_speed
+    }
+
+    update() {
+        this.y += 10
+        // this.y += this.speed
+    }
+}
+
 class Player extends GuaImage {
     constructor(game) {
         super(game,'player')
@@ -43,9 +59,26 @@ class Player extends GuaImage {
     setup() {
         this.speed = 10
         this.coolDown = 0
+        this.life = 500
     }
 
     update() {
+        for (var i = 0; i < this.scene.elements.length; i++) {
+            var e = this.scene.elements[i]
+            if (e instanceof Laser) {
+                log('laser coming',e.x,e.y)
+                // 判断碰撞
+                if (this.x < e.x &&　e.x < this.x + this.w) {
+                    if ( this.y < e.y + e.h &&　e.y + e.h <　this.y + this.h ) {
+                        log('撞了')
+                        this.life -= 15
+                        if (this.life < 0) {
+                            log('game over')
+                        }
+                    }
+                }
+            }
+        }
         this.speed = config.player_speed
         if (this.coolDown > 0) {
             this.coolDown -= 1
@@ -135,6 +168,9 @@ class Enemy extends GuaImage {
     }
 
     update(index) {
+        // 发射子弹
+        // log('enemy fire')
+        // 击落检测
         var s = this.scene.elements
         // log('scene',s)
         for (var i = 0; i < s.length; i++) {
@@ -213,6 +249,7 @@ class Scene extends GuaScene {
         // add particles
         // var p = GuaParticleSystem.new(this.game)
         // this.addElement(p)
+        this.coolDown = 0
     }
 
     addEnemies() {
@@ -221,6 +258,11 @@ class Scene extends GuaScene {
             var e = Enemy.new(this.game)
             es.push(e)
             this.addElement(e)
+            var l = Laser.new(this.game)
+            l.x = ( e.x + e.w ) / 2
+            l.y = e.y +　e.h
+            // log('debug',e.x,e.w,e.y)
+            this.addElement(l)
         }
         this.enemies = es
     }
@@ -252,10 +294,30 @@ class Scene extends GuaScene {
     update() {
         super.update()
         this.cloud.y += 1
+        if (this.coolDown > 0) {
+            this.coolDown--
+        }
     }
-    // draw() {
+    draw() {
+        super.draw()
+        if (this.coolDown === 0) {
+            this.coolDown = 40
+            // config.fire_coolDown
+            var es = this.enemies
+            // log('debug enemies',this.enemies)
+            for (var i = 0; i < es.length; i++) {
+                var e = es[i]
+                if (e instanceof Enemy) {
+                    var l = Laser.new(this.game)
+                    l.x = ( e.x + e.w ) / 2
+                    l.y = e.y + e.h
+                    // log('debug',e.x,e.w,e.y)
+                    this.addElement(l)
+                }
+            }
+        }
         // draw labels
         // this.game.drawImage(this.bg)
         // this.game.drawImage(this.player)
-    // }
+    }
 }

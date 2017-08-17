@@ -1,14 +1,14 @@
-var loadLevel = function(game, n) {
-    n = n - 1
-    var level = levels[n]
-    var blocks = []
-    for (var i = 0; i < level.length; i++) {
-        var p = level[i]
-        var b = Block(game, p)
-        blocks.push(b)
-    }
-    return blocks
-}
+// var loadLevel = function(game, n) {
+//     n = n - 1
+//     var level = levels[n]
+//     var blocks = []
+//     for (var i = 0; i < level.length; i++) {
+//         var p = level[i]
+//         var b = Block(game, p)
+//         blocks.push(b)
+//     }
+//     return blocks
+// }
 
 var enableDebugMode = function(game, enable) {
     if(!enable) {
@@ -44,6 +44,16 @@ var __main = function() {
         b3: 'img/b3.png',
         gm: 'img/gm.png',
         begin: 'img/begin.png',
+        s0: 'img/s0.png',
+        s1: 'img/s1.png',
+        s2: 'img/s2.png',
+        s3: 'img/s3.png',
+        s4: 'img/s4.png',
+        s5: 'img/s5.png',
+        s6: 'img/s6.png',
+        s7: 'img/s7.png',
+        s8: 'img/s8.png',
+        s9: 'img/s9.png',
 
 
     }
