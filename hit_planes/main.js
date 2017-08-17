@@ -47,6 +47,8 @@ var __main = function() {
         enemy4: 'img/enemy4.png',
         fire: 'img/fire.png',
         laser: 'img/laser.png',
+        gm: 'img/gm.png',
+        begin: 'img/begin.png',
         
 
     }

@@ -66,14 +66,16 @@ class Player extends GuaImage {
         for (var i = 0; i < this.scene.elements.length; i++) {
             var e = this.scene.elements[i]
             if (e instanceof Laser) {
-                log('laser coming',e.x,e.y)
+                // log('laser coming',e.x,e.y)
                 // 判断碰撞
                 if (this.x < e.x &&　e.x < this.x + this.w) {
                     if ( this.y < e.y + e.h &&　e.y + e.h <　this.y + this.h ) {
-                        log('撞了')
+                        // log('撞了')
                         this.life -= 15
                         if (this.life < 0) {
-                            log('game over')
+                            log('game over',this.scene)
+                            var end = SceneEnd.new(this.game)
+                            this.game.replaceScene(end)
                         }
                     }
                 }
