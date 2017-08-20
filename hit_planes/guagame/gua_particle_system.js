@@ -1,4 +1,3 @@
-
 class GuaLabel {
     constructor(game,text) {
         this.game = game

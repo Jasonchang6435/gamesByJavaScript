@@ -49,7 +49,7 @@ class GuaAnimation {
 
     move(x,event) {
         this.x += x
-        log('event',event)
+        // log('event',event)
         changeAnimation('run')
     }
 }

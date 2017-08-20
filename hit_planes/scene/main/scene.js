@@ -72,12 +72,26 @@ class Player extends GuaImage {
                     if ( this.y < e.y + e.h &&　e.y + e.h <　this.y + this.h ) {
                         // log('撞了')
                         this.life -= 15
+                        this.scene.elements.splice(i,1)
                         if (this.life < 0) {
                             log('game over',this.scene)
                             var end = SceneEnd.new(this.game)
                             this.game.replaceScene(end)
                         }
                     }
+                }
+            } else if (e instanceof Enemy) {
+                // 四个角撞击
+                var s = this
+                var leftDown = ( e.y < s.y && s.y < e.y + e.h ) && ( e.y < s.x + s.w && s.x + s.w < e.y + e.w)
+                var rightDown = ( e.y < s.y && s.y < e.y + e.h ) && ( e.y < s.x && s.x < e.y + e.w)
+                var leftUP = ( e.y < s.y && s.y < e.y + e.h ) && ( e.y < s.x + s.w && s.x + s.w < e.y + e.w)
+                var rightUp = ( e.y < s.y + s.h && s.y + s.h < e.y + e.h ) && ( e.y < s.x && s.x < e.y + e.w)
+                if (leftDown ||　rightDown || leftUP || rightUp) {
+                    log('撞飞机')
+                    this.life = 0
+                    var end = SceneEnd.new(this.game)
+                    this.game.replaceScene(end)
                 }
             }
         }
@@ -187,6 +201,8 @@ class Enemy extends GuaImage {
                 if (cona && conb) {
                     // log('xphr')
                     this.life -= 20
+                    // 计算系统
+                    this.scene.score += 20
                     s.splice(i,1)
                 }
             }
@@ -207,20 +223,6 @@ class Enemy extends GuaImage {
         }
     }
 
-    // moveLeft() {
-    //     this.x -= this.speed
-    // }
-    // moveRight(g) {
-    //     log('debug',this,g.canvas.width,g.canvas.height)
-    //     this.x += this.speed
-    // }
-    // moveUp() {
-    //     this.y -= this.speed
-    // }
-    // moveDown(g) {
-    //     log('debug',this,g)
-    //     this.y += this.speed
-    // }
 }
 
 
@@ -252,6 +254,7 @@ class Scene extends GuaScene {
         // var p = GuaParticleSystem.new(this.game)
         // this.addElement(p)
         this.coolDown = 0
+        this.score = 0
     }
 
     addEnemies() {
@@ -261,7 +264,7 @@ class Scene extends GuaScene {
             es.push(e)
             this.addElement(e)
             var l = Laser.new(this.game)
-            l.x = ( e.x + e.w ) / 2
+            l.x = e.x + e.w / 2 - l.w / 2
             l.y = e.y +　e.h
             // log('debug',e.x,e.w,e.y)
             this.addElement(l)
@@ -311,12 +314,34 @@ class Scene extends GuaScene {
                 var e = es[i]
                 if (e instanceof Enemy) {
                     var l = Laser.new(this.game)
-                    l.x = ( e.x + e.w ) / 2
+                    l.x = e.x + e.w / 2 - l.w / 2
                     l.y = e.y + e.h
                     // log('debug',e.x,e.w,e.y)
                     this.addElement(l)
                 }
             }
+        }
+        var life = '' + this.player.life
+        var x = 0
+        var y = 0
+        for (let i = 0; i < life.length; i++) {
+            let s = life[i]
+            let num = GuaImage.new(this.game,'s' + s)
+            num.x = x
+            num.y = y
+            this.game.drawImage(num,x,y)
+            x += 20
+        }
+        var score = '' + this.score
+        var a = 0
+        var b = this.game.canvas.height
+        for (let i = 0; i < score.length; i++) {
+            let s = score[i]
+            let num = GuaImage.new(this.game,'s' + s)
+            num.x = a
+            num.y = b - num.h
+            this.game.drawImage(num,x,y)
+            a += 20
         }
         // draw labels
         // this.game.drawImage(this.bg)

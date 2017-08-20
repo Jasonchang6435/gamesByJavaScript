@@ -9,8 +9,8 @@ class SceneEnd extends GuaScene {
         var game = this.game
         game.registerAction('r', function(){
             var s = Scene.new(game)
-            // var s = SceneTitle.new(game)
             game.replaceScene(s)
+            game.registerAction('r',function() {})
         })
         var self = this
         var begin = this.begin
