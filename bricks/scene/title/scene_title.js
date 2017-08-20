@@ -4,10 +4,12 @@ class SceneTitle extends GuaScene {
         game.registerAction('k', function(){
             var s = Scene(game)
             game.replaceScene(s)
+            game.registerAction('k',function() {})
         })
         game.registerAction('e', function(){
             var e = SceneEditor.new(game)
             game.replaceScene(e)
+            game.registerAction('e',function() {})
         })
     }
     draw() {

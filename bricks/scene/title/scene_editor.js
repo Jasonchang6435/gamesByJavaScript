@@ -8,12 +8,11 @@ class SceneEditor  extends GuaScene{
         game.registerAction('b', function(){
             var e = SceneTitle.new(game)
             game.replaceScene(e)
+            game.registerAction('b',function() {})
         })
     }
 
     clickSetup() {
-        // s.canvas = document.querySelector('#id-canvas')
-        // s.context = s.canvas.getContext('2d')
         var s = this
         s.img = imageFromPath('./img/block.png')
         // draw
@@ -30,14 +29,14 @@ class SceneEditor  extends GuaScene{
                 var by = Math.floor( y / bh) * bh
                 // log('SceneEditor clickSetup',x,y,cw,ch,bw,bh,bx,by)
                 s.__addBlock(bx,by)
-                console.log('debug blocks',s.blocks)
+                // console.log('debug blocks',s.blocks)
                 s.update()
             }
         })
         window.addEventListener('keydown',(event) => {
             if (event.key == 'b') {
                 // levels.unshift([s.blocks])
-                console.log('保存',[s.blocks],levels,levels.length)
+                // console.log('保存',[s.blocks],levels,levels.length)
                 levels = [s.blocks]
             }
         })
@@ -59,7 +58,6 @@ class SceneEditor  extends GuaScene{
         for (var i = 0; i < s.blocks.length; i++) {
             var block = s.blocks[i]
             s.game.context.drawImage(s.img, block[0],block[1])
-            // s.game.context.drawImage(s.img, 100,200)
         }
 
     }
@@ -68,15 +66,6 @@ class SceneEditor  extends GuaScene{
         var s = this
         s.game.context.clearRect(0, 0, s.game.canvas.width, s.game.canvas.height)
         s.draw()
-        // var s = this
-        // if (s.blocks.length == 0) {
-        //     return
-        // }
-        // for (var i = 0; i < s.blocks.length; i++) {
-        //     var block = s.blocks[i]
-        //     s.game.context.drawImage(s.img, block[0],block[1])
-        //     // s.game.context.drawImage(s.img, 100,200)
-        // }
 
     }
 }

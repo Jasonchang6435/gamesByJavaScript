@@ -4,6 +4,7 @@ class SceneEnd extends GuaScene {
         game.registerAction('r', function(){
             var s = SceneTitle.new(game)
             game.replaceScene(s)
+            game.registerAction('r',function() {})
         })
     }
     draw() {
