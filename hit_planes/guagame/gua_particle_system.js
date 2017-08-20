@@ -66,12 +66,14 @@ class GuaParticleSystem {
         this.particles = []
     }
 
-    update() {
+    update(index) {
         if (this.duration > 0) {
             this.duration--
         } else {
             this.duration = -1
             // return
+            // delete particle
+            this.game.scene.elements.splice(index,1)
         }
         // 添加小火花
         if (this.particles.length < this.numberOfParticles) {

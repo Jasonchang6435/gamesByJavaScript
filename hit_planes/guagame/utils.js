@@ -22,3 +22,10 @@ const randomBetween = function(start,end) {
     var n = Math.random() * (end - start + 1)
     return Math.floor(n + start)
 }
+
+var aInb = function(a,b) {
+    var cona = (b.x < a.x < b.x + b.w)
+    var conb = (b.y < a.y < b.y + b.h)
+    log('aInb ',cona,conb)
+    return cona && conb
+}

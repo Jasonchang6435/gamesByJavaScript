@@ -1,49 +1,93 @@
-var Player = function(game) {
-    var o = game.imageByName('paddle')
-    // var o = {
-    //     image: image,
-    //     x: 100,
-    //     y: 250,
-    //     speed: 15,
-    // }
-    o.x = 100
-    o.y = 250
-    o.speed = 15
-    var paddle = o
-    o.move = function(x) {
-        if (x < 0) {
-            x = 0
-        }
-        if (x > 400 - o.w) {
-            x = 400 - o.w
-        }
-        o.x = x
+class Player extends GuaImage {
+    constructor(game) {
+        super(game,'player')
+        this.setup()
+        // this.setupInputs()
     }
-    o.moveLeft = function() {
-        o.move(paddle.x - paddle.speed)
+
+    setup() {
+        this.speed = 10
+        this.coolDown = 0
+        this.life = 500
     }
-    o.moveRight = function() {
-        o.move(paddle.x + paddle.speed)
-    }
-    var aInb = function(x, x1, x2) {
-        return x >= x1 && x <= x2
-    }
-    o.collide = function(ball) {
-        // if (ball.y + ball.h > o.y) {
-        //     if (ball.x > o.x && ball.x < o.x + o.w) {
-        //         log('相撞')
-        //         return true
-        //     }
-        // }
-        // return false
-        var a = o
-        var b = ball
-        if (aInb(a.x, b.x, b.x + b.w) || aInb(b.x, a.x, a.x + a.w)) {
-            if (aInb(a.y, b.y, b.y + b.h) || aInb(b.y, a.y, a.y + a.h)) {
-                return true
+
+    update() {
+        for (var i = 0; i < this.scene.elements.length; i++) {
+            var e = this.scene.elements[i]
+            if (e instanceof Laser) {
+                // log('laser coming',e.x,e.y)
+                // 判断碰撞
+                if (this.x < e.x &&　e.x < this.x + this.w) {
+                    if ( this.y < e.y + e.h &&　e.y + e.h <　this.y + this.h ) {
+                        // log('撞了')
+                        this.life -= 15
+                        this.scene.elements.splice(i,1)
+                        if (this.life < 0) {
+                            log('game over',this.scene)
+                            var end = SceneEnd.new(this.game)
+                            this.game.replaceScene(end)
+                        }
+                    }
+                }
+            } else if (e instanceof Enemy) {
+                // 四个角撞击
+                var s = this
+                var leftDown = ( e.y < s.y && s.y < e.y + e.h ) && ( e.y < s.x + s.w && s.x + s.w < e.y + e.w)
+                var rightDown = ( e.y < s.y && s.y < e.y + e.h ) && ( e.y < s.x && s.x < e.y + e.w)
+                var leftUP = ( e.y < s.y && s.y < e.y + e.h ) && ( e.y < s.x + s.w && s.x + s.w < e.y + e.w)
+                var rightUp = ( e.y < s.y + s.h && s.y + s.h < e.y + e.h ) && ( e.y < s.x && s.x < e.y + e.w)
+                if (leftDown ||　rightDown || leftUP || rightUp) {
+                    log('撞飞机')
+                    this.life = 0
+                    var end = SceneEnd.new(this.game)
+                    this.game.replaceScene(end)
+                }
             }
         }
-        return false
+        this.speed = config.player_speed
+        if (this.coolDown > 0) {
+            this.coolDown -= 1
+        }
     }
-    return o
+
+    fire() {
+        if (this.coolDown === 0) {
+            this.coolDown = config.fire_coolDown
+            var x = this.x + this.w / 2
+            var y = this.y
+            var b = Bullet.new(this.game)
+            b.x = x
+            b.y = y
+            this.scene.addElement(b)
+        }
+    }
+
+    moveLeft() {
+        this.x -= this.speed
+        if (this.x < 0) {
+            this.x = 0
+        }
+    }
+    moveRight() {
+        // log('debug',this,g.canvas.width,g.canvas.height)
+        var g = this.game
+        this.x += this.speed
+        if (this.x + this.w > g.canvas.width) {
+            this.x = g.canvas.width - this.w
+        }
+    }
+    moveUp() {
+        this.y -= this.speed
+        if (this.y < 0) {
+            this.y = 0
+        }
+    }
+    moveDown() {
+        // log('debug',this,g)
+        var g = this.game
+        this.y += this.speed
+        if (this.y + this.h > g.canvas.height) {
+            this.y = g.canvas.height - this.h
+        }
+    }
 }
