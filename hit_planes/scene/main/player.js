@@ -11,32 +11,21 @@ class Player extends GuaImage {
         this.life = 500
     }
 
-    update() {
+    __in(e) {
+        var s = this
+        var leftDown = ( e.y < s.y && s.y < e.y + e.h ) && ( e.y < s.x + s.w && s.x + s.w < e.y + e.w)
+        var rightDown = ( e.y < s.y && s.y < e.y + e.h ) && ( e.y < s.x && s.x < e.y + e.w)
+        var leftUP = ( e.y < s.y && s.y < e.y + e.h ) && ( e.y < s.x + s.w && s.x + s.w < e.y + e.w)
+        var rightUp = ( e.y < s.y + s.h && s.y + s.h < e.y + e.h ) && ( e.y < s.x && s.x < e.y + e.w)
+        return (leftDown ||　rightDown || leftUP || rightUp)
+    }
+
+    __hit() {
         for (var i = 0; i < this.scene.elements.length; i++) {
             var e = this.scene.elements[i]
-            if (e instanceof Laser) {
-                // log('laser coming',e.x,e.y)
-                // 判断碰撞
-                if (this.x < e.x &&　e.x < this.x + this.w) {
-                    if ( this.y < e.y + e.h &&　e.y + e.h <　this.y + this.h ) {
-                        // log('撞了')
-                        this.life -= 15
-                        this.scene.elements.splice(i,1)
-                        if (this.life < 0) {
-                            log('game over',this.scene)
-                            var end = SceneEnd.new(this.game)
-                            this.game.replaceScene(end)
-                        }
-                    }
-                }
-            } else if (e instanceof Enemy) {
-                // 四个角撞击
-                var s = this
-                var leftDown = ( e.y < s.y && s.y < e.y + e.h ) && ( e.y < s.x + s.w && s.x + s.w < e.y + e.w)
-                var rightDown = ( e.y < s.y && s.y < e.y + e.h ) && ( e.y < s.x && s.x < e.y + e.w)
-                var leftUP = ( e.y < s.y && s.y < e.y + e.h ) && ( e.y < s.x + s.w && s.x + s.w < e.y + e.w)
-                var rightUp = ( e.y < s.y + s.h && s.y + s.h < e.y + e.h ) && ( e.y < s.x && s.x < e.y + e.w)
-                if (leftDown ||　rightDown || leftUP || rightUp) {
+            if (e instanceof Enemy) {
+                // // 四个角撞击
+                if (this.__in(e)) {
                     log('撞飞机')
                     this.life = 0
                     var end = SceneEnd.new(this.game)
@@ -44,6 +33,11 @@ class Player extends GuaImage {
                 }
             }
         }
+    }
+
+    update() {
+        this.__hit()
+
         this.speed = config.player_speed
         if (this.coolDown > 0) {
             this.coolDown -= 1
@@ -68,6 +62,7 @@ class Player extends GuaImage {
             this.x = 0
         }
     }
+
     moveRight() {
         // log('debug',this,g.canvas.width,g.canvas.height)
         var g = this.game
@@ -76,12 +71,14 @@ class Player extends GuaImage {
             this.x = g.canvas.width - this.w
         }
     }
+
     moveUp() {
         this.y -= this.speed
         if (this.y < 0) {
             this.y = 0
         }
     }
+
     moveDown() {
         // log('debug',this,g)
         var g = this.game

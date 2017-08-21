@@ -72,11 +72,7 @@ class Scene extends GuaScene {
         }
     }
 
-    draw() {
-        super.draw()
-        if (this.coolDown === 0) {
-            this.coolDown = 40
-        }
+    __drawLife() {
         var life = '' + this.player.life
         var x = 0
         var y = 0
@@ -88,6 +84,9 @@ class Scene extends GuaScene {
             this.game.drawImage(num,x,y)
             x += 20
         }
+    }
+
+    __drawScore() {
         var score = '' + this.score
         var a = 0
         var b = this.game.canvas.height
@@ -96,9 +95,20 @@ class Scene extends GuaScene {
             let num = GuaImage.new(this.game,'s' + s)
             num.x = a
             num.y = b - num.h
-            this.game.drawImage(num,x,y)
+            this.game.drawImage(num,a,b)
             a += 20
         }
+    }
+
+    draw() {
+        super.draw()
+        if (this.coolDown === 0) {
+            this.coolDown = 40
+        }
+        // draw life
+        this.__drawLife()
+        // draw score
+        this.__drawScore()
         // draw labels
         // this.game.drawImage(this.bg)
         // this.game.drawImage(this.player)

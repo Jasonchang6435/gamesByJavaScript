@@ -14,12 +14,7 @@ class Enemy extends GuaImage {
         this.coolDown = 30
     }
 
-    update(index) {
-        // 发射子弹
-        // log('enemy fire')
-        // 击落检测
-        var s = this.scene.elements
-        // log('scene',s)
+    __hit(s) {
         for (var i = 0; i < s.length; i++) {
             var e = s[i]
             if (e instanceof Bullet) {
@@ -27,10 +22,7 @@ class Enemy extends GuaImage {
                 var b = this
                 var cona = b.x< e.x && e.x<b.x + b.w
                 var conb = b.y < a.y && a.y< b.y + b.h
-                // log('xphr',e.x,e.y,a.x,a.y)
-                // log('xphr',,)
                 if (cona && conb) {
-                    // log('xphr')
                     this.life -= 20
                     // 计算系统
                     this.scene.score += 20
@@ -38,6 +30,15 @@ class Enemy extends GuaImage {
                 }
             }
         }
+
+    }
+
+    update(index) {
+        // 发射子弹
+        var s = this.scene.elements
+        // 击落检测
+        this.__hit(s)
+
         if (this.life < 0) {
             // 爆炸效果
             var ps = GuaParticleSystem.new(this.game)
@@ -48,6 +49,7 @@ class Enemy extends GuaImage {
             var ele = Enemy.new(this.game)
             this.scene.addElement(ele)
         }
+        
         this.y += this.speed
         if (this.y + this.h > this.game.canvas.height) {
             this.setup()

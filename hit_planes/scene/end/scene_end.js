@@ -5,13 +5,7 @@ class SceneEnd extends GuaScene {
         this.setupInputs()
     }
 
-    setupInputs() {
-        var game = this.game
-        game.registerAction('r', function(){
-            var s = Scene.new(game)
-            game.replaceScene(s)
-            game.registerAction('r',function() {})
-        })
+    __newScene() {
         var self = this
         var begin = this.begin
         window.addEventListener('click',function(event) {
@@ -19,7 +13,6 @@ class SceneEnd extends GuaScene {
             var y = event.offsetY
             if ( begin.x < x && x < begin.x + begin.w) {
                 if (begin.y < y && y < begin.y + begin.h) {
-                    log('debug',self.game)
                     var s = Scene.new(self.game)
                     self.game.replaceScene(s)
                 }
@@ -27,12 +20,26 @@ class SceneEnd extends GuaScene {
         })
     }
 
+    setupInputs() {
+        var game = this.game
+        game.registerAction('r', function(){
+            var s = Scene.new(game)
+            game.replaceScene(s)
+            game.registerAction('r',function() {})
+        })
+        this.__newScene()
+
+    }
+
     setup() {
         var game = this.game
+        // bg
         this.bg = GuaImage.new(game,'sky')
+        // game over
         this.gm = GuaImage.new(game,'gm')
         this.gm.x = 160
         this.gm.y = 200
+        // begin image
         this.begin = GuaImage.new(game,'begin')
         this.begin.x = 200
         this.begin.y = 300
