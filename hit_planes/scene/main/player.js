@@ -26,7 +26,7 @@ class Player extends GuaImage {
             if (e instanceof Enemy) {
                 // // 四个角撞击
                 if (this.__in(e)) {
-                    log('撞飞机')
+                    // log('撞飞机')
                     this.life = 0
                     var end = SceneEnd.new(this.game)
                     this.game.replaceScene(end)
