@@ -1,11 +1,14 @@
 class Pipes {
     constructor(game) {
         this.game = game
+        this.setup()
+    }
+
+    setup() {
         this.pipes = []
         this.管子横向间距 = 100
         this.columsOfPipes = 3
         for (var i = 0; i < this.columsOfPipes; i++) {
-        // for (var i = 0; i < 3; i++) {
             this.pipeSpace = 150
             var p1 = GuaImage.new(this.game,'pipe')
             p1.flipY = true
@@ -15,7 +18,6 @@ class Pipes {
             var p2 = GuaImage.new(this.game,'pipe')
             p2.x = p1.x
             this.resetPipePosition(p1,p2)
-            // log('debug pipes',this.pipes)
             this.pipes.push(p1)
             this.pipes.push(p2)
         }
@@ -23,7 +25,6 @@ class Pipes {
 
     resetPipePosition(p1,p2) {
         p1.y = randomBetween(-210,-30)
-        // p1.y = randomBetween(-200,0)
         p2.y = p1.y + p1.h + this.pipeSpace
     }
 
@@ -31,12 +32,10 @@ class Pipes {
         return new this(game)
     }
 
-    update() {
-        // log('debug update',this.pipes)
+    update(pipe) {
         for (var i = 0; i < this.pipes.length / 2; i+= 2) {
             var p1 = this.pipes[i]
             var p2 = this.pipes[i+1]
-            // log('space pipe',p1.y,p2.y)
             p1.x -= 5
             p2.x -= 5
             if (p1.x < -50) {
@@ -46,6 +45,44 @@ class Pipes {
                 p2.x += this.管子横向间距 * this.columsOfPipes
                 this.resetPipePosition(p1,p2)
             }
+            var p = p1
+            // // 碰撞检测
+            // var b = pipe
+            // // log('debug',b)
+            // if (p.x - b.w < b.x && b.x < p.x + p.w) {
+            //     p.birdIn = true
+            //     if (p.y + p.h < b.y && b.y < p2.y - b.h) {
+            //         continue
+            //     } else {
+            //         log('撞了,结束场景')
+            //         this.scene.end = true
+            //         this.scene.birdSpeed = 0
+            //         var gameOver = GuaImage.new(this.game,'gm')
+            //         // var end = SceneEnd.new(this.game)
+            //         gameOver.x = 50
+            //         gameOver.y = 100
+            //         this.scene.addElement(gameOver)
+            //         var begin = GuaImage.new(this.game,'begin')
+            //         begin.x = 80
+            //         begin.y = 190
+            //         this.scene.addElement(begin)
+            //         var self = this
+            //         window.addEventListener('click',function(event) {
+            //             var x = event.offsetX
+            //             var y = event.offsetY
+            //             if ( begin.x < x && x < begin.x + begin.w) {
+            //                 if (begin.y < y && y < begin.y + begin.h) {
+            //                     var s = SceneTitle.new(self.game)
+            //                     self.game.replaceScene(s)
+            //                 }
+            //             }
+            //         })
+            //     }
+            // } else if (p.x + p.w < b.x && p.birdIn) {
+            //     log('得分加一，更新得分')
+            //     p.birdIn = false
+            //     this.scene.score++
+            // }
         }
 
     }

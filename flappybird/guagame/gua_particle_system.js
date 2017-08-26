@@ -46,13 +46,7 @@ class GuaParticleSystem {
         this.particles = []
     }
 
-    update() {
-        if (this.duration > 0) {
-            this.duration--
-        } else {
-            this.duration = -1
-            // return
-        }
+    __updateParticles() {
         // 添加小火花
         if (this.particles.length < this.numberOfParticles) {
             var p = GuaParticle.new(this.game)
@@ -69,6 +63,18 @@ class GuaParticleSystem {
         }
         // 删除死掉的小火花
         this.particles = this.particles.filter(p => p.life > 0)
+    }
+
+    update() {
+        if (this.duration > 0) {
+            this.duration--
+        } else {
+            this.duration = -1
+            // delete particle
+            this.game.scene.elements.splice(index,1)
+        }
+        this.__updateParticles()
+
     }
 
     draw() {
