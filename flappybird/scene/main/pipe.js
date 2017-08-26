@@ -32,7 +32,60 @@ class Pipes {
         return new this(game)
     }
 
-    update(pipe) {
+
+    __toggleScene(begin) {
+        var self = this
+        window.addEventListener('click',function(event) {
+            var x = event.offsetX
+            var y = event.offsetY
+            if ( begin.x < x && x < begin.x + begin.w) {
+                if (begin.y < y && y < begin.y + begin.h) {
+                    var s = SceneTitle.new(self.game)
+                    self.game.replaceScene(s)
+                }
+            }
+        })
+    }
+
+    __sceneEnd() {
+        this.scene.end = true
+        this.scene.birdSpeed = 0
+        var gameOver = GuaImage.new(this.game,'gm')
+        // var end = SceneEnd.new(this.game)
+        gameOver.x = 50
+        gameOver.y = 100
+        this.scene.addElement(gameOver)
+        var begin = GuaImage.new(this.game,'begin')
+        begin.x = 80
+        begin.y = 190
+        this.scene.addElement(begin)
+        this.__toggleScene(begin)
+
+    }
+
+    __updateHit(p1,p2) {
+        for (var i = 0; i < this.scene.elements.length; i++) {
+            var e = this.scene.elements[i]
+            if (e instanceof GuaAnimation) {
+                var p = p1
+                var b = e
+                if (p.x - b.w < b.x && b.x < p.x + p.w) {
+                    p.birdIn = true
+                    if (p.y + p.h < b.y && b.y < p2.y - b.h) {
+                        continue
+                    } else {
+                        this.__sceneEnd()
+                    }
+                } else if (p.x + p.w < b.x && p.birdIn) {
+                    p.birdIn = false
+                    this.scene.score++
+                }
+
+            }
+        }
+    }
+
+    update() {
         for (var i = 0; i < this.pipes.length / 2; i+= 2) {
             var p1 = this.pipes[i]
             var p2 = this.pipes[i+1]
@@ -45,44 +98,7 @@ class Pipes {
                 p2.x += this.管子横向间距 * this.columsOfPipes
                 this.resetPipePosition(p1,p2)
             }
-            var p = p1
-            // // 碰撞检测
-            // var b = pipe
-            // // log('debug',b)
-            // if (p.x - b.w < b.x && b.x < p.x + p.w) {
-            //     p.birdIn = true
-            //     if (p.y + p.h < b.y && b.y < p2.y - b.h) {
-            //         continue
-            //     } else {
-            //         log('撞了,结束场景')
-            //         this.scene.end = true
-            //         this.scene.birdSpeed = 0
-            //         var gameOver = GuaImage.new(this.game,'gm')
-            //         // var end = SceneEnd.new(this.game)
-            //         gameOver.x = 50
-            //         gameOver.y = 100
-            //         this.scene.addElement(gameOver)
-            //         var begin = GuaImage.new(this.game,'begin')
-            //         begin.x = 80
-            //         begin.y = 190
-            //         this.scene.addElement(begin)
-            //         var self = this
-            //         window.addEventListener('click',function(event) {
-            //             var x = event.offsetX
-            //             var y = event.offsetY
-            //             if ( begin.x < x && x < begin.x + begin.w) {
-            //                 if (begin.y < y && y < begin.y + begin.h) {
-            //                     var s = SceneTitle.new(self.game)
-            //                     self.game.replaceScene(s)
-            //                 }
-            //             }
-            //         })
-            //     }
-            // } else if (p.x + p.w < b.x && p.birdIn) {
-            //     log('得分加一，更新得分')
-            //     p.birdIn = false
-            //     this.scene.score++
-            // }
+            this.__updateHit(p1,p2)
         }
 
     }

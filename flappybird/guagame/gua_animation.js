@@ -61,67 +61,8 @@ class GuaAnimation {
 
     }
 
-    __toggleScene(begin) {
-        var self = this
-        window.addEventListener('click',function(event) {
-            var x = event.offsetX
-            var y = event.offsetY
-            if ( begin.x < x && x < begin.x + begin.w) {
-                if (begin.y < y && y < begin.y + begin.h) {
-                    var s = SceneTitle.new(self.game)
-                    self.game.replaceScene(s)
-                }
-            }
-        })
-    }
-
-    __sceneEnd() {
-        this.scene.end = true
-        this.scene.birdSpeed = 0
-        var gameOver = GuaImage.new(this.game,'gm')
-        // var end = SceneEnd.new(this.game)
-        gameOver.x = 50
-        gameOver.y = 100
-        this.scene.addElement(gameOver)
-        var begin = GuaImage.new(this.game,'begin')
-        begin.x = 80
-        begin.y = 190
-        this.scene.addElement(begin)
-        this.__toggleScene(begin)
-
-    }
-
-    __updateHit(e) {
-        for (let j = 0; j < e.pipes.length; j+=2) {
-            var p = e.pipes[j]
-            var p2 = e.pipes[j+1]
-            var b = this
-            if (p.x - b.w < b.x && b.x < p.x + p.w) {
-                p.birdIn = true
-                if (p.y + p.h < b.y && b.y < p2.y - b.h) {
-                    continue
-                } else {
-                    this.__sceneEnd()
-                }
-            } else if (p.x + p.w < b.x && p.birdIn) {
-                p.birdIn = false
-                this.scene.score++
-            }
-        }
-
-
-    }
 
     update() {
-        // log('bird update',this.scene.elements)
-        var elements = this.scene.elements
-        for (var i = 0; i < elements.length; i++) {
-            var e = elements[i]
-            if (e instanceof Pipes) {
-                // log('bird update debug',e.pipes,e.pipes.length / 2)
-                this.__updateHit(e)
-            }
-        }
         // 更新alpha
         if (this.alpha > 0) {
             this.alpha -= 0.1
