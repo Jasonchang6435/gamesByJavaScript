@@ -1,6 +1,6 @@
 # gamesByJavaScript
 -----------
-###js web game  
+js web game  
 -----------
 ![planes](https://github.com/Jasonchang6435/gamesLive/blob/master/plane.gif)  
 
