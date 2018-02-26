@@ -1,4 +1,4 @@
-# gamesLive
+# gamesByJavaScript
 -----------
 ###js web game  
 -----------
