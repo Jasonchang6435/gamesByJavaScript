@@ -1,4 +1,4 @@
-class GuaAnimation {
+class YuanAnimation {
     constructor(game,name) {
         this.game = game
         this.setup()

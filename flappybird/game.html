@@ -8,13 +8,13 @@
                 border: 1px black solid;
             }
         </style>
-        <!-- gua game 相关文件 -->
-        <script src='guagame/utils.js'></script>
-        <script src='guagame/gua_game.js'></script>
-        <script src='guagame/gua_scene.js'></script>
-        <script src='guagame/gua_image.js'></script>
-        <script src='guagame/gua_animation.js'></script>
-        <script src='guagame/gua_particle_system.js'></script>
+        <!-- yuan game 相关文件 -->
+        <script src='yuangame/utils.js'></script>
+        <script src='yuangame/yuan_game.js'></script>
+        <script src='yuangame/yuan_scene.js'></script>
+        <script src='yuangame/yuan_image.js'></script>
+        <script src='yuangame/yuan_animation.js'></script>
+        <script src='yuangame/yuan_particle_system.js'></script>
 
         <!-- 场景文件 -->
         <script src='scene/main/pipe.js'></script>
@@ -32,11 +32,11 @@
         <div class="">
             <!-- <textarea id="id-text-log" rows="20" cols="50"></textarea> -->
         </div>
-        <div class="gua-controls">
+        <div class="yuan-controls">
             <label>
-                <input type="range" class='gua-auto-slider' value="" data-value='config.player_speed'>
+                <input type="range" class='yuan-auto-slider' value="" data-value='config.player_speed'>
                 玩家速度：
-                <span class=gua-label></span>
+                <span class=yuan-label></span>
             </label>
         </div>
 
@@ -58,11 +58,11 @@
                 var t = `
                     <div>
                         <label>
-                            <input type="range" class='gua-auto-slider'
+                            <input type="range" class='yuan-auto-slider'
                             max='300'
                             value="${item.value}" data-value='config.${key}'>
                             ${item.__comment}:
-                            <span class=gua-label></span>
+                            <span class=yuan-label></span>
                         </label>
                     </div>
                 `
@@ -70,20 +70,20 @@
             }
 
             var bindEvents = function() {
-                bindAll('.gua-auto-slider','input',function(event) {
+                bindAll('.yuan-auto-slider','input',function(event) {
                     var target = event.target
                     var bindVar = target.dataset.value
                     var value = target.value
                     log('debug',bindVar,value)
                     eval(bindVar + '.value=' + value)
                     //
-                    var label = target.closest('label').querySelector('.gua-label')
+                    var label = target.closest('label').querySelector('.yuan-label')
                     label.innerText = value
                 })
             }
 
             var insertControls = function() {
-                var div = e('.gua-controls')
+                var div = e('.yuan-controls')
                 var keys = Object.keys(config)
                 for (var k of keys) {
                     var item = config[k]

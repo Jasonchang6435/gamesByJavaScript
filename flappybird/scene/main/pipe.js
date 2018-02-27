@@ -10,12 +10,12 @@ class Pipes {
         this.columsOfPipes = 3
         for (var i = 0; i < this.columsOfPipes; i++) {
             this.pipeSpace = 150
-            var p1 = GuaImage.new(this.game,'pipe')
+            var p1 = YuanImage.new(this.game,'pipe')
             p1.flipY = true
             // 参考 canvas width
             // p1.x = 500 + i * 200
             p1.x = 280 + i * 130
-            var p2 = GuaImage.new(this.game,'pipe')
+            var p2 = YuanImage.new(this.game,'pipe')
             p2.x = p1.x
             this.resetPipePosition(p1,p2)
             this.pipes.push(p1)
@@ -50,12 +50,12 @@ class Pipes {
     __sceneEnd() {
         this.scene.end = true
         this.scene.birdSpeed = 0
-        var gameOver = GuaImage.new(this.game,'gm')
+        var gameOver = YuanImage.new(this.game,'gm')
         // var end = SceneEnd.new(this.game)
         gameOver.x = 50
         gameOver.y = 100
         this.scene.addElement(gameOver)
-        var begin = GuaImage.new(this.game,'begin')
+        var begin = YuanImage.new(this.game,'begin')
         begin.x = 80
         begin.y = 190
         this.scene.addElement(begin)
@@ -66,7 +66,7 @@ class Pipes {
     __updateHit(p1,p2) {
         for (var i = 0; i < this.scene.elements.length; i++) {
             var e = this.scene.elements[i]
-            if (e instanceof GuaAnimation) {
+            if (e instanceof YuanAnimation) {
                 var p = p1
                 var b = e
                 if (p.x - b.w < b.x && b.x < p.x + p.w) {

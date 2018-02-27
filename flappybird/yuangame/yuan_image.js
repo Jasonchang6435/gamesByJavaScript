@@ -1,4 +1,4 @@
-class GuaImage {
+class YuanImage {
     constructor(game,name) {
         this.game = game
         this.texture = game.textureByName(name)

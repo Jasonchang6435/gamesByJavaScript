@@ -1,4 +1,4 @@
-class SceneTitle extends GuaScene {
+class SceneTitle extends YuanScene {
     constructor(game) {
         super(game)
         this.setup()
@@ -7,7 +7,7 @@ class SceneTitle extends GuaScene {
 
     setup() {
         // bg
-        var bg = GuaImage.new(this.game,'bg')
+        var bg = YuanImage.new(this.game,'bg')
         this.addElement(bg)
         // 加入水管
         this.pipe = Pipes.new(this.game)
@@ -15,7 +15,7 @@ class SceneTitle extends GuaScene {
         // 循环移动地面 抽象为ground类
         this.grounds = []
         for (var i = 0; i < 30; i++) {
-            var g = GuaImage.new(this.game,'ground')
+            var g = YuanImage.new(this.game,'ground')
             g.x = i * 19
             g.y = 450
             this.addElement(g)
@@ -23,7 +23,7 @@ class SceneTitle extends GuaScene {
         }
         this.skipCount = 4
         // bird
-        var b = GuaAnimation.new(this.game)
+        var b = YuanAnimation.new(this.game)
         this.birdSpeed = 2
         b.x = 80
         b.y = 100
@@ -33,7 +33,7 @@ class SceneTitle extends GuaScene {
         this.end = false
         this.score = 0
         // var sname = "" + this.score
-        // var score = GuaImage.new(this.game,)
+        // var score = YuanImage.new(this.game,)
     }
 
     debug() {
@@ -85,7 +85,7 @@ class SceneTitle extends GuaScene {
         var y = 0
         for (let i = 0; i < score.length; i++) {
             let s = score[i]
-            let num = GuaImage.new(this.game,'s' + s)
+            let num = YuanImage.new(this.game,'s' + s)
             num.x = x
             num.y = y
             this.game.drawImage(num,x,y)

@@ -1,4 +1,4 @@
-class GuaScene {
+class YuanScene {
     constructor(game) {
         this.game = game
         this.elements = []
@@ -11,7 +11,6 @@ class GuaScene {
     }
 
     addElement(img) {
-        // ?
         img.scene = this
         this.elements.push(img)
     }
