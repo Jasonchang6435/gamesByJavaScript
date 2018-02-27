@@ -1,4 +1,4 @@
-class SceneEnd extends GuaScene {
+class SceneEnd extends YuanScene {
     constructor(game) {
         super(game)
         this.setup()
@@ -34,13 +34,13 @@ class SceneEnd extends GuaScene {
     setup() {
         var game = this.game
         // bg
-        this.bg = GuaImage.new(game,'sky')
+        this.bg = YuanImage.new(game,'sky')
         // game over
-        this.gm = GuaImage.new(game,'gm')
+        this.gm = YuanImage.new(game,'gm')
         this.gm.x = 160
         this.gm.y = 200
         // begin image
-        this.begin = GuaImage.new(game,'begin')
+        this.begin = YuanImage.new(game,'begin')
         this.begin.x = 200
         this.begin.y = 300
         this.addElement(this.bg)
@@ -48,8 +48,4 @@ class SceneEnd extends GuaScene {
         this.addElement(this.begin)
     }
 
-    // draw() {
-    //     // draw labels
-    //     this.game.context.fillText('游戏结束, 按 r 返回标题界面', 100, 290)
-    // }
 }

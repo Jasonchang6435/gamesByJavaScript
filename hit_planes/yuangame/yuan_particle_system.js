@@ -1,9 +1,7 @@
-class GuaParticle extends GuaImage {
+class YuanParticle extends YuanImage {
     constructor(game) {
         super(game,'fire')
-        // this.speed = 10
         this.setup()
-        // this.setupInputs()
     }
 
     init(x,y,vx,vy) {
@@ -27,7 +25,7 @@ class GuaParticle extends GuaImage {
     }
 }
 
-class GuaParticleSystem {
+class YuanParticleSystem {
     constructor(game,text) {
         this.game = game
         this.text = text
@@ -49,7 +47,7 @@ class GuaParticleSystem {
     __updateParticles() {
         // 添加小火花
         if (this.particles.length < this.numberOfParticles) {
-            var p = GuaParticle.new(this.game)
+            var p = YuanParticle.new(this.game)
             // 设置初始化坐标
             var speed = 2
             var vx = randomBetween(-speed,speed)
@@ -70,8 +68,6 @@ class GuaParticleSystem {
             this.duration--
         } else {
             this.duration = -1
-            // return
-            // delete particle
             this.game.scene.elements.splice(index,1)
         }
 

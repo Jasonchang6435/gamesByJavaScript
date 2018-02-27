@@ -49,7 +49,7 @@ var __main = function() {
         s9: 'img/s9.png',
 
     }
-    var game = GuaGame.instance(30, images, function(g){
+    var game = YuanGame.instance(30, images, function(g){
         var s = Scene.new(g)
         g.runWithScene(s)
     })

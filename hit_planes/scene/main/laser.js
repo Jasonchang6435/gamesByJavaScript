@@ -1,4 +1,4 @@
-class Laser extends GuaImage {
+class Laser extends YuanImage {
     constructor(game) {
         super(game,'laser')
         this.setup()

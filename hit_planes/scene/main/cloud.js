@@ -1,4 +1,4 @@
-class Cloud extends GuaImage {
+class Cloud extends YuanImage {
     constructor(game) {
         // var type = randomBetween(1,2)
         // var name = 'enemy' + type

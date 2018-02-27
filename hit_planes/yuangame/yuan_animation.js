@@ -1,4 +1,4 @@
-class GuaAnimation {
+class YuanAnimation {
     constructor(game) {
         this.game = game
         // 为了省事 hard code 一套硬编码对象

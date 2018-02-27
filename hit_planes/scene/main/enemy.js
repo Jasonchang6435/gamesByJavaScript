@@ -1,4 +1,4 @@
-class Enemy extends GuaImage {
+class Enemy extends YuanImage {
     constructor(game) {
         var type = randomBetween(1,5)
         var name = 'enemy' + type
@@ -41,7 +41,7 @@ class Enemy extends GuaImage {
 
         if (this.life < 0) {
             // 爆炸效果
-            var ps = GuaParticleSystem.new(this.game)
+            var ps = YuanParticleSystem.new(this.game)
             ps.x = this.x + this.w / 2
             ps.y = this.y + this.h / 2
             s.splice(index,1)
@@ -49,7 +49,7 @@ class Enemy extends GuaImage {
             var ele = Enemy.new(this.game)
             this.scene.addElement(ele)
         }
-        
+
         this.y += this.speed
         if (this.y + this.h > this.game.canvas.height) {
             this.setup()

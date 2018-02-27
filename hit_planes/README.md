@@ -1,2 +1,2 @@
-# gua.game.js
+# yuan.game.js
 JavaScript 写游戏

@@ -1,4 +1,4 @@
-class Player extends GuaImage {
+class Player extends YuanImage {
     constructor(game) {
         super(game,'player')
         this.setup()

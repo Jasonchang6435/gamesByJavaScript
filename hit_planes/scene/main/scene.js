@@ -1,4 +1,4 @@
-class Scene extends GuaScene {
+class Scene extends YuanScene {
     constructor(game) {
         super(game)
         this.setup()
@@ -12,7 +12,7 @@ class Scene extends GuaScene {
         this.coolDown = 0
         this.score = 0
         // bg
-        this.bg = GuaImage.new(game,'sky')
+        this.bg = YuanImage.new(game,'sky')
         // player
         this.player = Player.new(game)
         this.player.x = 200
@@ -78,7 +78,7 @@ class Scene extends GuaScene {
         var y = 0
         for (let i = 0; i < life.length; i++) {
             let s = life[i]
-            let num = GuaImage.new(this.game,'s' + s)
+            let num = YuanImage.new(this.game,'s' + s)
             num.x = x
             num.y = y
             this.game.drawImage(num,x,y)
@@ -92,7 +92,7 @@ class Scene extends GuaScene {
         var b = this.game.canvas.height
         for (let i = 0; i < score.length; i++) {
             let s = score[i]
-            let num = GuaImage.new(this.game,'s' + s)
+            let num = YuanImage.new(this.game,'s' + s)
             num.x = a
             num.y = b - num.h
             this.game.drawImage(num,a,b)

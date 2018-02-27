@@ -1,4 +1,4 @@
-class Bullet extends GuaImage {
+class Bullet extends YuanImage {
     constructor(game) {
         super(game,'bullet')
         // this.speed = 10

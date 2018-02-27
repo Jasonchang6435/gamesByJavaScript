@@ -1,4 +1,4 @@
-class SceneEditor  extends GuaScene{
+class SceneEditor  extends YuanScene{
     constructor(game) {
         super()
         this.blocks = []
@@ -68,15 +68,5 @@ class SceneEditor  extends GuaScene{
         var s = this
         s.game.context.clearRect(0, 0, s.game.canvas.width, s.game.canvas.height)
         s.draw()
-        // var s = this
-        // if (s.blocks.length == 0) {
-        //     return
-        // }
-        // for (var i = 0; i < s.blocks.length; i++) {
-        //     var block = s.blocks[i]
-        //     s.game.context.drawImage(s.img, block[0],block[1])
-        //     // s.game.context.drawImage(s.img, 100,200)
-        // }
-
     }
 }
