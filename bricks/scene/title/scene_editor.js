@@ -1,4 +1,4 @@
-class SceneEditor  extends GuaScene{
+class SceneEditor  extends YuanScene{
     constructor(game) {
         super()
         this.blocks = []

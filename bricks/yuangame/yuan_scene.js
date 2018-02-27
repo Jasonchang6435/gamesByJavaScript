@@ -1,4 +1,4 @@
-class GuaScene {
+class YuanScene {
     constructor(game) {
         this.game = game
     }

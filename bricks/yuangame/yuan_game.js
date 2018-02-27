@@ -1,5 +1,4 @@
-// 瓜
-class GuaGame {
+class YuanGame {
     constructor(fps, images, runCallback) {
         window.fps = fps
         this.images = images
