@@ -1,11 +1,5 @@
 var Player = function(game) {
     var o = game.imageByName('paddle')
-    // var o = {
-    //     image: image,
-    //     x: 100,
-    //     y: 250,
-    //     speed: 15,
-    // }
     o.x = 100
     o.y = 250
     o.speed = 15
@@ -29,13 +23,6 @@ var Player = function(game) {
         return x >= x1 && x <= x2
     }
     o.collide = function(ball) {
-        // if (ball.y + ball.h > o.y) {
-        //     if (ball.x > o.x && ball.x < o.x + o.w) {
-        //         log('相撞')
-        //         return true
-        //     }
-        // }
-        // return false
         var a = o
         var b = ball
         if (aInb(a.x, b.x, b.x + b.w) || aInb(b.x, a.x, a.x + a.w)) {

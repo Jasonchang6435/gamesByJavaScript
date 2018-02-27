@@ -20,19 +20,10 @@ var Paddle = function() {
     o.moveRight = function() {
         o.x += o.speed
     }
-    // o.collide = function(ball) {
-    //     if (ball.y + ball.image.height > o.y) {
-    //         if (ball.x > o.x && ball.x < o.x + o.image.width) {
-    //             log('相撞')
-    //             return true
-    //         }
-    //     }
-    //     return false
-    // }
     return o
 }
 
-var GuaGame = function() {
+var YuanGame = function() {
     var g = {}
     var canvas = e('#id-canvas')
     var context = canvas.getContext('2d')
@@ -47,7 +38,7 @@ var GuaGame = function() {
 }
 
 var __main = function() {
-    // var game = GuaGame()
+    // var game = YuanGame()
     var canvas = e('#id-canvas')
     var context = canvas.getContext('2d')
     var paddle = Paddle()

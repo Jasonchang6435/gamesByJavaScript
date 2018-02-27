@@ -1,4 +1,4 @@
-class SceneEnd extends GuaScene {
+class SceneEnd extends YuanScene {
     constructor(game) {
         super(game)
         game.registerAction('r', function(){

@@ -1,4 +1,4 @@
-class GuaAnimation {
+class YuanAnimation {
     constructor(game) {
         this.game = game
         // 为了省事 hard code 一套硬编码对象
@@ -71,12 +71,5 @@ class GuaAnimation {
         }
         var name = animationNames[keyStatus]
         this.changeAnimation(name)
-        // if (keyStatus === 'down') {
-        //     changeAnimation('run')
-        // } else if(keyStatus === 'idle') {
-        //     changeAnimation('idle')
-        //     // keyStatus
-        // }
-
     }
 }

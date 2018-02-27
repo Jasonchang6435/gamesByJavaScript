@@ -15,7 +15,7 @@ var aInb = function(a,b) {
     return cona && conb
 }
 
-class Bullet extends GuaImage {
+class Bullet extends YuanImage {
     constructor(game) {
         super(game,'bullet')
         // this.speed = 10
@@ -33,7 +33,7 @@ class Bullet extends GuaImage {
     }
 }
 
-class Player extends GuaImage {
+class Player extends YuanImage {
     constructor(game) {
         super(game,'player')
         this.setup()
@@ -94,7 +94,7 @@ class Player extends GuaImage {
     }
 }
 
-class Cloud extends GuaImage {
+class Cloud extends YuanImage {
     constructor(game) {
         // var type = randomBetween(1,2)
         // var name = 'enemy' + type
@@ -118,7 +118,7 @@ class Cloud extends GuaImage {
 
 }
 
-class Enemy extends GuaImage {
+class Enemy extends YuanImage {
     constructor(game) {
         var type = randomBetween(1,5)
         var name = 'enemy' + type
@@ -155,7 +155,7 @@ class Enemy extends GuaImage {
         }
         if (this.life < 0) {
             // 爆炸效果
-            var ps = GuaParticleSystem.new(this.game)
+            var ps = YuanParticleSystem.new(this.game)
             ps.x = this.x + this.w / 2
             ps.y = this.y + this.h / 2
             s.splice(index,1)
@@ -168,25 +168,10 @@ class Enemy extends GuaImage {
             this.setup()
         }
     }
-
-    // moveLeft() {
-    //     this.x -= this.speed
-    // }
-    // moveRight(g) {
-    //     log('debug',this,g.canvas.width,g.canvas.height)
-    //     this.x += this.speed
-    // }
-    // moveUp() {
-    //     this.y -= this.speed
-    // }
-    // moveDown(g) {
-    //     log('debug',this,g)
-    //     this.y += this.speed
-    // }
 }
 
 
-class Scene extends GuaScene {
+class Scene extends YuanScene {
     constructor(game) {
         super(game)
         this.setup()
@@ -197,10 +182,7 @@ class Scene extends GuaScene {
         var game = this.game
         var s = this
         this.numOfEnemies = 5
-        this.bg = GuaImage.new(game,'sky')
-        // this.cloud = GuaImage.new(game,'cloud')
-        // this.player = GuaImage.new(game,'player')
-        // this.elements = []
+        this.bg = YuanImage.new(game,'sky')
         this.player = Player.new(game)
         this.cloud = Cloud.new(game)
         this.player.x = 200
@@ -210,9 +192,6 @@ class Scene extends GuaScene {
         this.addElement(this.cloud)
         this.addElement(this.player)
         this.addEnemies()
-        // add particles
-        // var p = GuaParticleSystem.new(this.game)
-        // this.addElement(p)
     }
 
     addEnemies() {
@@ -253,9 +232,4 @@ class Scene extends GuaScene {
         super.update()
         this.cloud.y += 1
     }
-    // draw() {
-        // draw labels
-        // this.game.drawImage(this.bg)
-        // this.game.drawImage(this.player)
-    // }
 }

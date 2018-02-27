@@ -1,25 +1,10 @@
-class SceneTitle extends GuaScene {
+class SceneTitle extends YuanScene {
     constructor(game) {
         super(game)
-        // var l = GuaLabel.new(this.game,'hello')
-        // this.addElement(l)
-        // game.registerAction('k', function(){
-        //     var s = Scene(game)
-        //     game.replaceScene(s)
-        // })
-        // game.registerAction('e', function(){
-        //     var e = SceneEditor.new(game)
-        //     game.replaceScene(e)
-        // })
-        // var ps = GuaParticleSystem.new(this.game)
-        // this.addElement(ps)
-        // bg
-        // var bg = GuaAnimation.new(this.game,'bg')
-        // this.addElement(bg)
-        var bg = GuaImage.new(this.game,'bg')
+        var bg = YuanImage.new(this.game,'bg')
         this.addElement(bg)
         //
-        var w = GuaAnimation.new(this.game)
+        var w = YuanAnimation.new(this.game)
         w.x = 100
         w.y = 200
         this.w = w

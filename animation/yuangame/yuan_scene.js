@@ -1,4 +1,4 @@
-class GuaScene {
+class YuanScene {
     constructor(game) {
         this.game = game
         this.elements = []
@@ -11,7 +11,6 @@ class GuaScene {
     }
 
     addElement(img) {
-        // ?
         img.scene = this
         this.elements.push(img)
     }
@@ -35,9 +34,9 @@ class GuaScene {
         // for(var e of this.elements) {
             var e = this.elements[i]
             // log('debug update',e )
-            if ( (e instanceof GuaParticleSystem) && e.duration === -1) {
-                    this.elements.splice(i,1)
-                    // 子弹要循环判断碰撞，就要在离开页面时删除不需要判断的子弹
+            if ((e instanceof YuanParticleSystem) && e.duration === -1) {
+                this.elements.splice(i,1)
+                // 子弹要循环判断碰撞，就要在离开页面时删除不需要判断的子弹
             }else if ( (e instanceof Bullet) && e.y < 0){
                 this.elements.splice(i,1)
             } else if (e instanceof Enemy){

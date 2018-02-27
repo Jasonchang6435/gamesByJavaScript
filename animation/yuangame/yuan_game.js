@@ -1,5 +1,4 @@
-// 瓜
-class GuaGame {
+class YuanGame {
     constructor(fps, images, runCallback) {
         window.fps = fps
         this.images = images
@@ -28,7 +27,7 @@ class GuaGame {
         return this.i
     }
     drawImage(img) {
-        // img 是一个 GuaImage
+        // img 是一个 YuanImage
         this.context.drawImage(img.texture, img.x, img.y)
     }
     // update
@@ -52,7 +51,6 @@ class GuaGame {
             var key = actions[i]
             var status = g.keydowns[key]
             if(status === 'down') {
-            // if(g.keydowns[key]) {
                 // 如果按键被按下, 调用注册的 action
                 g.actions[key]('down')
             } else if (status === 'up') {
@@ -75,11 +73,6 @@ class GuaGame {
         var g = this
         // log('image by name', g.images)
         var img = g.images[name]
-        // var image = {
-        //     w: img.width,
-        //     h: img.height,
-        //     image: img,
-        // }
         return img
     }
     runWithScene(scene) {

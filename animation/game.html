@@ -8,15 +8,15 @@
                 border: 1px black solid;
             }
         </style>
-        <!-- gua game 相关文件 -->
-        <script src='guagame/utils.js'></script>
-        <script src='guagame/mouse.js'></script>
-        <script src='guagame/gua_game.js'></script>
-        <script src='guagame/gua_scene.js'></script>
-        <script src='guagame/gua_image.js'></script>
-        <script src='guagame/gua_label.js'></script>
-        <script src='guagame/gua_animation.js'></script>
-        <script src='guagame/gua_particle_system.js'></script>
+        <!-- yuan game 相关文件 -->
+        <script src='yuangame/utils.js'></script>
+        <script src='yuangame/mouse.js'></script>
+        <script src='yuangame/yuan_game.js'></script>
+        <script src='yuangame/yuan_scene.js'></script>
+        <script src='yuangame/yuan_image.js'></script>
+        <script src='yuangame/yuan_label.js'></script>
+        <script src='yuangame/yuan_animation.js'></script>
+        <script src='yuangame/yuan_particle_system.js'></script>
 
         <!-- 场景文件 -->
         <script src='scene/main/paddle.js'></script>
@@ -39,30 +39,30 @@
         </div>
         <div class="">
             <label>
-                <input type="range" class='gua-auto-slider' value="" data-value='config.player_speed'>
+                <input type="range" class='yuan-auto-slider' value="" data-value='config.player_speed'>
                 玩家速度：
-                <span class=gua-label></span>
+                <span class=yuan-label></span>
             </label>
         </div>
         <div class="">
             <label>
-                <input type="range" class='gua-auto-slider' value="" data-value='config.bullet_speed'>
+                <input type="range" class='yuan-auto-slider' value="" data-value='config.bullet_speed'>
                 子弹速度：
-                <span class=gua-label></span>
+                <span class=yuan-label></span>
             </label>
         </div>
         <div class="">
             <label>
-                <input type="range" class='gua-auto-slider' value="" data-value='config.fire_coolDown'>
+                <input type="range" class='yuan-auto-slider' value="" data-value='config.fire_coolDown'>
                 冷却时间：
-                <span class=gua-label></span>
+                <span class=yuan-label></span>
             </label>
         </div>
         <div class="">
             <label>
-                <input type="range" min='-10' max='10' class='gua-auto-slider' value="" data-value='config.cloud_speed'>
+                <input type="range" min='-10' max='10' class='yuan-auto-slider' value="" data-value='config.cloud_speed'>
                 云速度：
-                <span class=gua-label></span>
+                <span class=yuan-label></span>
             </label>
         </div>
         <script src=main.js></script>
@@ -78,14 +78,14 @@
                     })
                 }
             }
-            bindAll('.gua-auto-slider','input',function(event) {
+            bindAll('.yuan-auto-slider','input',function(event) {
                 var target = event.target
                 var bindVar = target.dataset.value
                 var value = target.value
                 log('debug',bindVar,value)
                 eval(bindVar + '=' + value)
                 //
-                var label = target.closest('label').querySelector('.gua-label')
+                var label = target.closest('label').querySelector('.yuan-label')
                 label.innerText = value
             })
         </script>

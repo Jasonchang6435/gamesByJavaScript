@@ -65,7 +65,7 @@ var __main = function() {
         r5:'img/r5.gif',
         r6:'img/r6.gif',
     }
-    var game = GuaGame.instance(30, images, function(g){
+    var game = YuanGame.instance(30, images, function(g){
         // var s = Scene.new(g)
         var s = SceneTitle.new(g)
         g.runWithScene(s)

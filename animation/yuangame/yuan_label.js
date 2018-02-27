@@ -1,4 +1,4 @@
-class GuaLabel {
+class YuanLabel {
     constructor(game,text) {
         this.game = game
         this.text = text
